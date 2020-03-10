@@ -44,7 +44,8 @@ var defaults = {
   onComplete: null, // Callback function(result)
   inViewport: true, // Stops animations if the element isn´t visible on the screen
   direction: 'up', // Animation direction ['up'||'down']
-  transition: 'ease-in-out'
+  transition: 'ease-in-out',
+  transform: true
 };
 var FX_NO_TRANSITION = 'slotMachineNoTransition';
 var FX_FAST = 'slotMachineBlurFast';
@@ -156,7 +157,10 @@ var SlotMachine = function () {
   }, {
     key: '_changeTransform',
     value: function _changeTransform(margin) {
-      this.container.style.transform = 'matrix(1, 0, 0, 1, 0, ' + margin + ')';
+      if(this.transform)
+        this.container.style.transform = 'matrix(1, 0, 0, 1, 0, ' + margin + ')';
+      else
+        this.container.style.top = -margin - 500 + 'px';
     }
   }, {
     key: '_isGoingBackward',
